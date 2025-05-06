@@ -1,4 +1,4 @@
-# vue-crash-2025
+# VUE-Crash-2025 - Practice
 
 This template should help get you started developing with Vue 3 in Vite.
 
