@@ -1,29 +1,43 @@
-# VUE-Crash-2025 - Practice
+# Vue Jobs Project (YouTube)
 
-This template should help get you started developing with Vue 3 in Vite.
+This is the jobs listing project from the [YouTube crash course](https://www.youtube.com/watch?v=VeNfHj6MhgA).
 
-## Recommended IDE Setup
+<img src="public/screen.png" />
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Usage
 
-## Customize configuration
+This project uses JSON-Server for a mock backend.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Install Dependencies
 
-## Project Setup
-
-```sh
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Run JSON Server
 
-```sh
+The server will run on http://localhost:8000
+
+```bash
+npm run server
+```
+
+### Run Vite Frontend
+
+Vue will run on http://localhost:3000
+
+```bash
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Build for Production
 
-```sh
+```bash
 npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
 ```
