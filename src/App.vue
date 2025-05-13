@@ -1,10 +1,9 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const name = ref("John Doe");
 const status = ref("active");
 const tasks = ref(["Task One", "Task Two", "Task Three"]);
-const link = ref("https://google.com");
 
 const toggleStatus = () => {
   if (status.value === "active") {
@@ -15,6 +14,27 @@ const toggleStatus = () => {
     status.value = "active";
   }
 };
+const newTask = ref("");
+const addTask = () => {
+  if (newTask.value.trim() !== "") {
+    tasks.value.push(newTask.value);
+    newTask.value = "";
+  }
+};
+
+const deleteTask = (index) => {
+  tasks.value.splice(index, 1);
+};
+
+onMounted(async () => {
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+    const data = await response.json();
+    tasks.value = data.map((task) => task.title);
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+  }
+});
 </script>
 
 <template>
@@ -24,11 +44,23 @@ const toggleStatus = () => {
   <p v-else-if="status === 'pending'">User is Pending</p>
   <p v-else>User is Inactive</p>
 
+  <form @submit.prevent="addTask">
+    <label for="newTask">Add Task</label>
+    <input
+      type="text"
+      v-model="newTask"
+      placeholder="Enter your task"
+      id="newTask"
+    />
+    <button type="submit">Submit</button>
+  </form>
+  <br />
   <ul>
-    <li v-for="task in tasks" :key="task">{{ task }}</li>
+    <li v-for="(task, index) in tasks" :key="task">
+      <span>{{ task }}</span>
+      <button @click="deleteTask(index)">X</button>
+    </li>
   </ul>
 
-  <a :href="link">Click for Google</a>
-  <br />
   <button @click="toggleStatus">Change status</button>
 </template>
